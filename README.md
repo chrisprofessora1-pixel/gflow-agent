@@ -111,3 +111,7 @@ O gflow abre um Chrome real com a sua sessão. Rode só na sua máquina. Nunca c
 ## Créditos
 
 O CLI é do projeto [gflow-cli](https://github.com/ffroliva/gflow-cli), de ffroliva. Este repositório é só o agente e o instalador.
+
+## Licença
+
+MIT. Use, adapte e compartilhe mantendo o aviso de copyright.
