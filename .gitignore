@@ -1,0 +1,20 @@
+# Contas, sessões e banco local
+.env
+*.env
+profile_*/
+gflow.db*
+telemetry.db*
+cookies*
+*.cookies
+
+# Saídas geradas
+images/
+videos/
+audio/
+legendas/
+montagens/
+
+# Lixo de sistema
+.DS_Store
+node_modules/
+*.log
