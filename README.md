@@ -14,12 +14,12 @@ Ele não é um gerador próprio. Ele conversa com você, confere a conta e os cr
 
 ## O que você precisa
 
-- macOS ou Linux. No Windows, siga o passo a passo manual mais abaixo.
+- macOS, Linux ou Windows.
 - [gflow-cli](https://github.com/ffroliva/gflow-cli) instalado.
 - Uma conta Google com acesso ao Flow.
 - [OpenCode](https://opencode.ai) instalado.
 
-## Instalar
+## Instalar no macOS ou Linux
 
 ```bash
 uv tool install gflow-cli
@@ -35,16 +35,38 @@ Se você ainda não tem o `uv`:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-O instalador faz quatro coisas:
+## Instalar no Windows
+
+No PowerShell:
+
+```powershell
+uv tool install gflow-cli
+
+git clone https://github.com/chrisprofessora1-pixel/gflow-agent.git
+cd gflow-agent
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+Se você ainda não tem o `uv`:
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+O `install.ps1` acha a pasta Downloads real do Windows, inclusive quando o OneDrive redireciona. Se a pasta estiver em outro lugar, ele usa o caminho do sistema.
+
+## O que o instalador faz
+
+Ele funciona igual em todos:
 
 1. Cria a pasta `Flow` dentro dos seus Downloads.
 2. Aponta `GFLOW_CLI_OUTPUT_DIR` para essa pasta no `.env` do gflow.
-3. Copia o agente para `~/.config/opencode/agents/gflow.md`.
+3. Copia o agente para `~/.config/opencode/agents/gflow.md`. No Windows, é `%USERPROFILE%\.config\opencode\agents\gflow.md`.
 4. Guarda um backup se você já tinha um agente com esse nome.
 
 ## Login
 
-Uma vez só, no terminal:
+Uma vez só, no terminal, seja bash, zsh ou PowerShell:
 
 ```bash
 gflow auth login --browser chrome
@@ -74,11 +96,21 @@ Ele pergunta o que falta, mostra o custo e só gera depois do seu sim.
 
 ## Onde ficam os arquivos
 
+No macOS e no Linux:
+
 - Imagem: `~/Downloads/Flow/images/<data>/`
 - Vídeo: `~/Downloads/Flow/videos/<data>/`
 - Áudio: `~/Downloads/Flow/audio/`
 - Legendas: `~/Downloads/Flow/legendas/`
 - Montagens: `~/Downloads/Flow/montagens/`
+
+No Windows:
+
+- Imagem: `%USERPROFILE%\Downloads\Flow\images\<data>\`
+- Vídeo: `%USERPROFILE%\Downloads\Flow\videos\<data>\`
+- Áudio: `%USERPROFILE%\Downloads\Flow\audio\`
+- Legendas: `%USERPROFILE%\Downloads\Flow\legendas\`
+- Montagens: `%USERPROFILE%\Downloads\Flow\montagens\`
 
 O instalador grava o caminho em `GFLOW_CLI_OUTPUT_DIR`, no `.env` da pasta de configuração do gflow. Se quiser mudar de pasta, edite essa linha.
 
@@ -97,12 +129,14 @@ O gflow abre um Chrome real com a sua sessão. Rode só na sua máquina. Nunca c
 
 ## Windows, instalação manual
 
+Se preferir não rodar o `install.ps1`:
+
 1. Instale o CLI com `uv tool install gflow-cli`.
 2. Crie a pasta `%USERPROFILE%\Downloads\Flow`.
-3. Crie ou edite `%LOCALAPPDATA%\gflow-cli\.env` com esta linha:
+3. Crie ou edite `%LOCALAPPDATA%\gflow-cli\.env` com esta linha, usando barra normal:
 
    ```text
-   GFLOW_CLI_OUTPUT_DIR="C:\Users\SEU_USUARIO\Downloads\Flow"
+   GFLOW_CLI_OUTPUT_DIR="C:/Users/SEU_USUARIO/Downloads/Flow"
    ```
 
 4. Copie `opencode\agents\gflow.md` para `%USERPROFILE%\.config\opencode\agents\gflow.md`.
